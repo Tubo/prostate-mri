@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Container, Row, Col, Input, Button} from 'reactstrap'
-import {Document, Page, Text, View, StyleSheet, PDFDownloadLink} from '@react-pdf/renderer';
 
 import Navbar from './Navbar'
 import LesionContent from './Lesions'
