@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import {Container, Row, Col, Input, Button} from 'reactstrap'
+import {Document, Page, Text, View, StyleSheet, PDFDownloadLink} from '@react-pdf/renderer';
 
 import Navbar from './Navbar'
 import LesionContent from './Lesions'
 import ClinicalContent from './ClinicalField'
-import { DocumentDownloadLink } from './DocumentGeneration'
+import {DocumentDownloadLink} from './DocumentGeneration'
 
 
 class App extends Component {
@@ -28,7 +29,8 @@ class App extends Component {
     onHistoryChange(content) {
         this.setState({
             history: content,
-        })
+        });
+        this.documentTree()
     }
 
     onBiopsyChange(content) {
@@ -50,16 +52,13 @@ class App extends Component {
         )
     }
 
+
     render() {
         let handlers = {
             onHistoryChange: this.onHistoryChange,
             onBiopsyChange: this.onBiopsyChange,
             onDimChange: this.onDimChange,
             volume: this.state.volume,
-        };
-        let content = {
-            history: this.state.history,
-            biopsy: this.state.biopsy,
         };
 
         return (
@@ -70,7 +69,6 @@ class App extends Component {
                         <Col>
                             <MainContent
                                 clinical={handlers}
-                                content={content}
                             />
                         </Col>
                     </Row>
@@ -80,7 +78,8 @@ class App extends Component {
     }
 }
 
-class MainContent extends Component {
+class MainContent
+    extends Component {
     constructor(props) {
         super(props);
     }
@@ -100,9 +99,7 @@ class MainContent extends Component {
                     volume={volume}
                 />
                 <LesionContent/>
-                <DocumentDownloadLink
-                    content={this.props.content}
-                />
+                <DocumentDownloadLink />
                 <Button color="danger">Reset</Button>
             </>
         )
