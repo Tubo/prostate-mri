@@ -1,17 +1,17 @@
 import React, {Component} from 'react';
-import {Container, Row, Col, Input} from 'reactstrap'
+import {Container, Row, Col, Input, Button} from 'reactstrap'
 
-import MyNavbar from './Navbar'
-import Sidebar from './Sidebar'
-import NewLesion from './Lesions'
-import ClinicalField from './ClinicalField'
+import Navbar from './Navbar'
+import LesionContent from './Lesions'
+import ClinicalContent from './ClinicalField'
+import { DocumentDownloadLink } from './DocumentGeneration'
 
 
 class App extends Component {
     render() {
         return (
             <>
-                <MyNavbar/>
+                <Navbar/>
                 <Container className="mt-4">
                     <Row>
                         <Col>
@@ -25,11 +25,17 @@ class App extends Component {
 }
 
 class MainContent extends Component {
+    constructor(props) {
+        super(props);
+    }
+
     render() {
         return (
             <>
-                <ClinicalField/>
-                <NewLesion/>
+                <ClinicalContent/>
+                <LesionContent/>
+                <DocumentDownloadLink/>
+                <Button color="danger">Reset</Button>
             </>
         )
     }
