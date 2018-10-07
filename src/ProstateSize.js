@@ -4,43 +4,29 @@ import {Row, Col, Input} from 'reactstrap'
 class ProstateSize extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            x: null,
-            y: null,
-            z: null,
-            volume: 0,
-        };
         this.handleChange = this.handleChange.bind(this)
     }
 
     handleChange(e) {
         let target = e.target;
-        this.setState({
-            [target.name]: target.value
-        });
+        this.props.onDimChange('dim_' + target.name, target.value);
 
-        this.setState(state => {
-                return {
-                    volume: Math.round(state.x * state.y * state.z * 0.52 * 100) / 100
-                }
-            }
-        )
     }
 
     render() {
         return (
             <Row form>
                 <Col sm={4}>
-                    <Input placeholder='X (cm)' name='x' onChange={this.handleChange} value={this.state.x}/>
+                    <Input placeholder='X (cm)' name='x' onChange={this.handleChange} />
                 </Col>
                 <Col sm={4}>
-                    <Input placeholder='Y (cm)' name='y' onChange={this.handleChange} value={this.state.y}/>
+                    <Input placeholder='Y (cm)' name='y' onChange={this.handleChange} />
                 </Col>
                 <Col sm={4}>
-                    <Input placeholder='Z (cm)' name='z' onChange={this.handleChange} value={this.state.z}/>
+                    <Input placeholder='Z (cm)' name='z' onChange={this.handleChange} />
                 </Col>
                 <Col>
-                    <p>The total prostate volume is {this.state.volume} cm^3</p>
+                    <p>The total prostate volume is {this.props.volume} cm^3</p>
                 </Col>
             </Row>
         )

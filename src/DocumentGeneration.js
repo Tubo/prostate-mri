@@ -1,12 +1,12 @@
-import React from 'react';
-import { Document, Page, Text, View, StyleSheet, PDFDownloadLink } from '@react-pdf/renderer';
-import { Button } from 'reactstrap'
+import React, {Component} from 'react';
+import ReactPDF, {Document, Page, Text, View, StyleSheet, PDFDownloadLink} from '@react-pdf/renderer';
+import {Button} from 'reactstrap'
 
 // Create styles
 const styles = StyleSheet.create({
     page: {
         flexDirection: 'row',
-        backgroundColor: '#E4E4E4'
+        backgroundColor: '#ffffff'
     },
     section: {
         margin: 10,
@@ -16,24 +16,32 @@ const styles = StyleSheet.create({
 });
 
 // Create Document Component
-const MyDocument = (
-    <Document>
-        <Page size="A4" style={styles.page}>
-            <View style={styles.section}>
-                <Text>Section #1</Text>
-            </View>
-            <View style={styles.section}>
-                <Text>Section #2</Text>
-            </View>
-        </Page>
-    </Document>
-);
+function MyDocument(text) {
+    return (
+        <Document>
+            <Page size="A4" style={styles.page}>
+                <View style={styles.section}>
+                    <Text>Clinical Information</Text>
+                    <Text></Text>
+                    <Text></Text>
+                </View>
+                <View style={styles.section}>
+                    <Text>Lesions</Text>
+                </View>
+            </Page>
+        </Document>
+    )
+}
 
 
-export const DocumentDownloadLink = () => (
-    <div>
-        <PDFDownloadLink document={MyDocument} fileName="example.pdf">
-            <Button color="success">Generate PDF</Button>
-        </PDFDownloadLink>
-    </div>
-);
+export function DocumentDownloadLink(props) {
+    let document = MyDocument(props);
+
+    return (
+        <div>
+            <PDFDownloadLink document={document} fileName="report.pdf">
+                <Button color="success">Generate PDF</Button>
+            </PDFDownloadLink>
+        </div>
+    );
+}
