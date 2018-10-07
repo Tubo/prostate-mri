@@ -99,7 +99,6 @@ class MainContent
                     volume={volume}
                 />
                 <LesionContent/>
-                <DocumentDownloadLink />
                 <Button color="danger">Reset</Button>
             </>
         )
