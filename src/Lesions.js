@@ -23,6 +23,14 @@ class LesionContent extends Component {
     }
 }
 
+class Lesion extends Component {
+    render() {
+        return (
+            <p>I'm a {this.props.type} lesion</p>
+        )
+    }
+}
+
 class NewLesion extends Component {
     constructor(props) {
         super(props);
@@ -90,15 +98,9 @@ class NewLesion extends Component {
     }
 }
 
-class Lesion extends Component {
-    render() {
-        return (
-            <p>I'm a {this.props.type} lesion</p>
-        )
-    }
-}
 
 class DropdownSelection extends Component {
+
     render() {
         const lexicon = {
             total: {
@@ -108,6 +110,31 @@ class DropdownSelection extends Component {
                 4: 'high (clinically significant cancer is likely to be present)',
                 5: 'very high (clinically significant cancer is highly likely to be present)',
             },
+            t2w_pz: {
+                1: 'uniform hyperintense signal intensity (normal)',
+                2: 'linear or wedge-shaped hypointensity or diffuse mild hypointensity, usually indistinct margin',
+                3: 'heterogeneous signal intensity or non-circumscribed, rounded, moderate hypointensity (includes others that do not qualify as 2, 4, or 5)',
+                4: 'circumscribed, homogenous moderate hypointensefocus/mass confined to prostate and <1.5 cm in greatest dimension',
+                5: 'same as 4 but ≥1.5cm in greatest dimension or definite extraprostatic extension/invasive behavior',
+            },
+            t2w_tz: {
+                1: 'homogeneous intermediate signal intensity (normal)',
+                2: 'circumscribed hypointense or heterogeneous encapsulated nodule(s) (BPH)',
+                3: 'heterogeneous signal intensity with obscured margins (includes others that do not qualify as 2, 4, or 5)',
+                4: 'lenticular or non-circumscribed, homogeneous, moderately hypointense, and <1.5 cm in greatest dimension',
+                5: 'same as 4, but ≥1.5cm in greatest dimension or definite extraprostatic extension/invasive behavior',
+            },
+            dwi: {
+                1: 'no abnormality (i.e., normal) on ADC and high b-value DWI',
+                2: 'indistinct hypointense on ADC',
+                3: 'focal mildly/moderately hypointense on ADC and isointense/mildly hyperintense on high b-valueDWI.',
+                4: 'focal markedly hypointense on ADC and markedly hyperintense on high b-value DWI; <1.5cm in greatestdimension',
+                5: 'same as 4 but ≥1.5cm in greatest dimension or definite extraprostatic extension/invasive behavior',
+            },
+            dce: {
+                '-': 'no early enhancement, or diffuse enhancement not corresponding to a focal finding on T2W and/or DWI or focal enhancement corresponding to a lesion demonstrating features of BPH on T2WI',
+                '+': 'focal, and; earlier than or contemporaneously with enhancement of adjacent normal prostatic tissues, and; correspnds to suspicious finding on T2W and/or DWI',
+            }
         };
         return (
             <FormGroup>
