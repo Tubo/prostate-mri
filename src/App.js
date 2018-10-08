@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Container, Row, Col, Input, Button} from 'reactstrap'
 
 import Navbar from './Navbar'
-import LesionContent from './Lesions'
+import { LesionList, NewLesion } from './Lesions'
 import ClinicalContent from './ClinicalField'
 import {DocumentDownloadLink} from './DocumentGeneration'
 
@@ -18,8 +18,6 @@ class App extends Component {
             dim_y: 0,
             dim_z: 0,
             lesions: [
-                {type: 'PZ'},
-                {type: 'PZ'},
             ],
         };
 
@@ -82,8 +80,7 @@ class App extends Component {
     }
 }
 
-class MainContent
-    extends Component {
+class MainContent extends Component {
     constructor(props) {
         super(props);
     }
@@ -102,8 +99,8 @@ class MainContent
                     onDimChange={onDimChange}
                     volume={volume}
                 />
-                <LesionContent
-                    lesions={this.props.lesions}/>
+                <LesionList lesions={this.props.lesions}/>
+                <NewLesion/>
                 <Button color="danger">Reset</Button>
             </>
         )
