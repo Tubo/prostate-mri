@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import {Row, Col, Button, Input, FormGroup, Label} from 'reactstrap'
+import {Row, Col} from 'reactstrap'
 import {Modal, ModalBody, ModalHeader, ModalFooter} from 'reactstrap'
+import {Form, FormGroup, Label, Input, FormText, Button} from 'reactstrap'
 import ImageMapper from 'react-image-mapper'
 import Dropzone from 'react-dropzone'
 
@@ -9,8 +10,15 @@ import schematic from './schematic.png'
 
 class LesionContent extends Component {
     render() {
+        let lesions = this.props.lesions.map((lesion) => (
+            <Lesion type={lesion.type} key={lesion.id}/>
+        ));
+
         return (
-            <NewLesion></NewLesion>
+            <>
+                {lesions}
+                <NewLesion></NewLesion>
+            </>
         )
     }
 }
@@ -23,12 +31,19 @@ class NewLesion extends Component {
         };
 
         this.toggle = this.toggle.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     toggle() {
         this.setState({
             modal: !this.state.modal,
         })
+    }
+
+    handleSubmit(e) {
+        this.toggle();
+        this.props.addLesion();
+        e.preventDefault();
     }
 
     render() {
@@ -40,29 +55,34 @@ class NewLesion extends Component {
                 </Button>
                 <Modal isOpen={this.state.modal} toggle={this.toggle} size="lg">
                     <ModalBody>
-                        <Row className="justify-content-center">
-                            <Col lg={4}>
-                                <SelectLocation />
-                            </Col>
-                            <Col>Hello world!
-                                <DropdownSelection sequence="T2"/>
-                                <DropdownSelection sequence="ADC"/>
-                                <DropdownSelection sequence="DCE"/>
-                                <YesNoSelection/>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <DropImage sequence="T2"/>
-                            </Col>
-                            <Col>
-                                <DropImage sequence="ADC"/>
-                            </Col>
-                            <Col>
-                                <DropImage sequence="DCE"/>
-                            </Col>
-                        </Row>
-                        <Button>Add</Button>
+                        <Form>
+                            <Row className="justify-content-center">
+                                <Col lg={4}>
+                                    <p>Step 1: select the anatomical location</p>
+                                    <SelectLocation/>
+                                </Col>
+                                <Col>
+                                    <p>Step 2: enter the sequence lexicon</p>
+                                    <DropdownSelection sequence="T2"/>
+                                    <DropdownSelection sequence="ADC"/>
+                                    <DropdownSelection sequence="DCE"/>
+                                    <DropdownSelection sequence="Total"/>
+                                    <YesNoSelection/>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
+                                    <DropImage sequence="T2"/>
+                                </Col>
+                                <Col>
+                                    <DropImage sequence="ADC"/>
+                                </Col>
+                                <Col>
+                                    <DropImage sequence="DCE"/>
+                                </Col>
+                            </Row>
+                            <Button onClick={this.handleSubmit}>Add</Button>
+                        </Form>
                     </ModalBody>
                 </Modal>
             </>
@@ -70,8 +90,25 @@ class NewLesion extends Component {
     }
 }
 
+class Lesion extends Component {
+    render() {
+        return (
+            <p>I'm a {this.props.type} lesion</p>
+        )
+    }
+}
+
 class DropdownSelection extends Component {
     render() {
+        const lexicon = {
+            total: {
+                1: 'very low (clinically significant cancer is highly unlikely to be present)',
+                2: 'low (clinically significant cancer is unlikely to be present',
+                3: 'intermediate (the presence of clinically significant cancer is equivocal)',
+                4: 'high (clinically significant cancer is likely to be present)',
+                5: 'very high (clinically significant cancer is highly likely to be present)',
+            },
+        };
         return (
             <FormGroup>
                 <Label>
@@ -142,7 +179,7 @@ class SelectLocation extends Component {
         return (
             <>
                 <ImageMapper src={schematic} map={MAP} onClick={this.handleClick}/>
-                <p>Location: {this.state.location}</p>
+                <p>Location: {this.state.location || 'not selected'}</p>
             </>
         )
     }

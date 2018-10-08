@@ -17,7 +17,10 @@ class App extends Component {
             dim_x: 0,
             dim_y: 0,
             dim_z: 0,
-            lesions: [],
+            lesions: [
+                {type: 'PZ'},
+                {type: 'PZ'},
+            ],
         };
 
         this.onBiopsyChange = this.onBiopsyChange.bind(this);
@@ -59,6 +62,7 @@ class App extends Component {
             onDimChange: this.onDimChange,
             volume: this.state.volume,
         };
+        let lesions = this.state.lesions;
 
         return (
             <>
@@ -68,6 +72,7 @@ class App extends Component {
                         <Col>
                             <MainContent
                                 clinical={handlers}
+                                lesions={lesions}
                             />
                         </Col>
                     </Row>
@@ -97,7 +102,8 @@ class MainContent
                     onDimChange={onDimChange}
                     volume={volume}
                 />
-                <LesionContent/>
+                <LesionContent
+                    lesions={this.props.lesions}/>
                 <Button color="danger">Reset</Button>
             </>
         )
