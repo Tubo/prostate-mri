@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e852e485-2ffc-44f7-b196-978ba08461c8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Lesions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Lesions.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -46,15 +47,15 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="html" value="65" />
-          <entry key="js" value="10823" />
-          <entry key="txt" value="151" />
+          <entry key="js" value="10965" />
+          <entry key="txt" value="211" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="HTML" value="65" />
-          <entry key="JavaScript" value="10823" />
-          <entry key="PLAIN_TEXT" value="151" />
+          <entry key="JavaScript" value="10965" />
+          <entry key="PLAIN_TEXT" value="211" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -126,8 +127,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Lesions.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="267">
-              <caret line="57" column="26" selection-start-line="57" selection-start-column="26" selection-end-line="57" selection-end-column="26" />
+            <state relative-caret-position="847">
+              <caret line="371" column="27" lean-forward="true" selection-start-line="371" selection-start-column="27" selection-end-line="371" selection-end-column="27" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -181,8 +182,8 @@
         <option value="$PROJECT_DIR$/src/DocumentGeneration.js" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/src/App.js" />
-        <option value="$PROJECT_DIR$/src/Lesions.js" />
         <option value="$PROJECT_DIR$/src/index.js" />
+        <option value="$PROJECT_DIR$/src/Lesions.js" />
       </list>
     </option>
   </component>
@@ -209,9 +210,9 @@
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="384" />
+    <option name="x" value="422" />
     <option name="y" value="23" />
-    <option name="width" value="1296" />
+    <option name="width" value="1258" />
     <option name="height" value="1027" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
@@ -437,7 +438,21 @@
       <option name="project" value="LOCAL" />
       <updated>1539135940392</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Replace str.includes with str.indexOf for ie11">
+      <created>1539136299392</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1539136299392</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Properly replace str.includes with str.indexOf for ie11">
+      <created>1539136438240</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1539136438240</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TodoView">
@@ -450,10 +465,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="384" y="23" width="1296" height="1027" extended-state="0" />
+    <frame x="422" y="23" width="1258" height="1027" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.8835726" visible="true" weight="0.20095694" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.8835726" visible="true" weight="0.20723684" />
       <window_info id="Structure" order="1" sideWeight="0.11642743" side_tool="true" weight="0.20095694" />
       <window_info id="npm" order="2" sideWeight="0.272293" side_tool="true" weight="0.23374176" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -465,7 +480,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32941177" />
       <window_info anchor="bottom" id="Docker" order="7" />
-      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49952874" visible="true" weight="0.32941177" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="8" sideWeight="0.49952874" visible="true" weight="0.32941177" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49952874" weight="0.32941177" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50047123" side_tool="true" weight="0.32941177" />
@@ -523,7 +538,9 @@
     <MESSAGE value="New lesion assessment will update depending on anatomical location." />
     <MESSAGE value="Added polyfill for ie11" />
     <MESSAGE value="Adjusted polyfill import to first line" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adjusted polyfill import to first line" />
+    <MESSAGE value="Replace str.includes with str.indexOf for ie11" />
+    <MESSAGE value="Properly replace str.includes with str.indexOf for ie11" />
+    <option name="LAST_COMMIT_MESSAGE" value="Properly replace str.includes with str.indexOf for ie11" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/App.css">
@@ -631,8 +648,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Lesions.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="57" column="26" selection-start-line="57" selection-start-column="26" selection-end-line="57" selection-end-column="26" />
+        <state relative-caret-position="847">
+          <caret line="371" column="27" lean-forward="true" selection-start-line="371" selection-start-column="27" selection-end-line="371" selection-end-column="27" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>

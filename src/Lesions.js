@@ -364,7 +364,10 @@ class DropImage extends Component {
             )
         } else {
             return (
-                <Dropzone disableClick={true} onDrop={this.onDrop}>
+                <Dropzone disableClick={false}
+                          onDrop={this.onDrop}
+                          multiple={false}
+                >
                     Please drag and drop the {this.props.sequence} image and enter the image number.
                 </Dropzone>
             )
