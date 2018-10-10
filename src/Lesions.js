@@ -61,7 +61,7 @@ export class NewLesion extends Component {
             zone = 'tz'
         } else if (raw_location.indexOf('CZ') !== -1) {
             zone = 'cz'
-        } else if (raw_location.includes('AS') !== -1) {
+        } else if (raw_location.indexOf('AS') !== -1) {
             zone = 'as'
         }
 
