@@ -55,13 +55,13 @@ export class NewLesion extends Component {
         const raw_location = area.name;
         let side, section, zone;
 
-        if (raw_location.includes('PZ')) {
+        if (raw_location.indexOf('PZ') !== -1) {
             zone = 'pz'
-        } else if (raw_location.includes('TZ')) {
+        } else if (raw_location.indexOf('TZ') !== -1) {
             zone = 'tz'
-        } else if (raw_location.includes('CZ')) {
+        } else if (raw_location.indexOf('CZ') !== -1) {
             zone = 'cz'
-        } else if (raw_location.includes('AS')) {
+        } else if (raw_location.includes('AS') !== -1) {
             zone = 'as'
         }
 
