@@ -24,6 +24,7 @@ class App extends Component {
         this.onBiopsyChange = this.onBiopsyChange.bind(this);
         this.onHistoryChange = this.onHistoryChange.bind(this);
         this.onDimChange = this.onDimChange.bind(this);
+        this.handleNewLesionAdded = this.handleNewLesionAdded.bind(this);
     }
 
     onHistoryChange(content) {
@@ -52,15 +53,26 @@ class App extends Component {
         )
     }
 
+    handleNewLesionAdded(lesion) {
+        this.setState(prevState => ({
+            lesions: [
+                ...prevState.lesions,
+                lesion,
+            ]
+        }))
+    }
+
 
     render() {
         let handlers = {
             onHistoryChange: this.onHistoryChange,
             onBiopsyChange: this.onBiopsyChange,
             onDimChange: this.onDimChange,
+            handleNewLesionAdded: this.handleNewLesionAdded,
             volume: this.state.volume,
         };
-        let lesions = this.state.lesions;
+        let lesions = this.state.lesions,
+            current_lesion = this.state.current_lesion;
 
         return (
             <>
@@ -71,6 +83,7 @@ class App extends Component {
                             <MainContent
                                 clinical={handlers}
                                 lesions={lesions}
+                                current_lesion={current_lesion}
                             />
                         </Col>
                     </Row>
@@ -89,6 +102,7 @@ class MainContent extends Component {
         let onHistoryChange = this.props.clinical.onHistoryChange,
             onBiopsyChange = this.props.clinical.onBiopsyChange,
             onDimChange = this.props.clinical.onDimChange,
+            handleNewLesionAdded = this.props.clinical.handleNewLesionAdded,
             volume = this.props.clinical.volume;
 
         return (
@@ -100,7 +114,7 @@ class MainContent extends Component {
                     volume={volume}
                 />
                 <LesionList lesions={this.props.lesions}/>
-                <NewLesion/>
+                <NewLesion lesion={this.props.current_lesion} addLesion={handleNewLesionAdded}/>
                 <Button color="danger">Reset</Button>
             </>
         )
