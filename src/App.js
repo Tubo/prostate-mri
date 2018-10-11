@@ -17,8 +17,8 @@ class App extends Component {
             dim_x: 0,
             dim_y: 0,
             dim_z: 0,
-            lesions: [
-            ],
+            lesions: [],
+            editing: false,
         };
 
         this.onBiopsyChange = this.onBiopsyChange.bind(this);

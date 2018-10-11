@@ -20,6 +20,11 @@ export class LesionList extends Component {
 }
 
 class Lesion extends Component {
+    constructor(props) {
+        super(props);
+
+
+    }
     render() {
         const lesion = this.props.lesion;
 
@@ -40,8 +45,9 @@ class Lesion extends Component {
                     <li>DWI: {scores.dwi}</li>
                     <li>DCE: {scores.dce}</li>
                     <li>Total: {scores.total}</li>
-                    <li>Comment: {scores.comment}</li>
+                    <li>Comment: {comment}</li>
                 </ul>
+                <Button onClick={this.handleClick}>Edit</Button>
             </div>
         )
     }
