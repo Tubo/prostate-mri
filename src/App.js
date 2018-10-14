@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import {Container, Row, Col, Input, Button} from 'reactstrap'
+import jsPDF from 'jspdf'
 
 import Navbar from './Navbar'
 import {LesionList, NewLesion} from './Lesions'
 import ClinicalContent from './ClinicalField'
-import {DocumentDownloadLink} from './DocumentGeneration'
 
 
 class App extends Component {
@@ -58,6 +58,7 @@ class App extends Component {
         this.handleToggleModal = this.handleToggleModal.bind(this);
         this.handleSelectLocation = this.handleSelectLocation.bind(this);
         this.handleAssessmentChange = this.handleAssessmentChange.bind(this);
+        this.generateDoc = this.generateDoc.bind(this);
     }
 
     onHistoryChange(content) {
@@ -221,6 +222,18 @@ class App extends Component {
         });
     }
 
+    generateDoc() {
+        let doc = new jsPDF('portrait', 'mm', 'a4');
+        let clinical_information = [
+            this.state.history,
+            this.state.biopsy,
+        ];
+
+        doc.text(clinical_information, 10, 10)
+
+        doc.save('a4.pdf');
+    }
+
     render() {
         let handlers = {
             onHistoryChange: this.onHistoryChange,
@@ -232,6 +245,7 @@ class App extends Component {
             handleToggleModal: this.handleToggleModal,
             handleAssessmentChange: this.handleAssessmentChange,
             handleSelectLocation: this.handleSelectLocation,
+            generateDoc: this.generateDoc,
             volume: this.state.volume,
         };
         let lesions = this.state.lesions,
@@ -262,6 +276,7 @@ class MainContent
         super(props);
     }
 
+
     render() {
         let onHistoryChange = this.props.clinical.onHistoryChange,
             onBiopsyChange = this.props.clinical.onBiopsyChange,
@@ -272,6 +287,7 @@ class MainContent
             handleToggleModal = this.props.clinical.handleToggleModal,
             handleAssessmentChange = this.props.clinical.handleAssessmentChange,
             handleSelectLocation = this.props.clinical.handleSelectLocation,
+            generateDoc = this.props.clinical.generateDoc,
             volume = this.props.clinical.volume;
 
         return (
@@ -294,6 +310,7 @@ class MainContent
                            handleSelectLocation={handleSelectLocation}
                 />
                 <Button color="danger">Reset</Button>
+                <Button color="success" onClick={() => generateDoc()}>Generate</Button>
             </>
         )
     }
