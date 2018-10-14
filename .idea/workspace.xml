@@ -16,13 +16,14 @@
     <session id="-821422777">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="6" />
+          <entry key="project.closed" value="7" />
           <entry key="project.open.time.10" value="1" />
+          <entry key="project.open.time.11" value="1" />
           <entry key="project.open.time.5" value="1" />
           <entry key="project.open.time.7" value="2" />
           <entry key="project.open.time.8" value="2" />
           <entry key="project.open.time.88" value="1" />
-          <entry key="project.opened" value="7" />
+          <entry key="project.opened" value="8" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -49,15 +50,15 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="html" value="65" />
-          <entry key="js" value="16731" />
-          <entry key="txt" value="327" />
+          <entry key="js" value="23878" />
+          <entry key="txt" value="375" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="HTML" value="65" />
-          <entry key="JavaScript" value="16731" />
-          <entry key="PLAIN_TEXT" value="327" />
+          <entry key="JavaScript" value="23878" />
+          <entry key="PLAIN_TEXT" value="375" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -117,8 +118,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/App.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="63">
-              <caret line="20" column="26" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="26" />
+            <state relative-caret-position="3431">
+              <caret line="256" selection-start-line="256" selection-end-line="256" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -129,8 +130,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Lesions.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-821">
-              <caret line="25" selection-start-line="25" selection-end-line="25" />
+            <state relative-caret-position="239">
+              <caret line="17" column="54" selection-start-line="17" selection-start-column="54" selection-end-line="17" selection-end-column="54" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -154,6 +155,10 @@
       <find>ClinicalField</find>
       <find>state</find>
       <find>data</find>
+      <find>handleNewLesionAdded</find>
+      <find>addLesion</find>
+      <find>current_lesion</find>
+      <find>toggle</find>
     </findStrings>
     <replaceStrings>
       <replace>/&gt;</replace>
@@ -161,6 +166,10 @@
       <replace>InputArea</replace>
       <replace>content</replace>
       <replace>schema_map</replace>
+      <replace>handleLesionEdited</replace>
+      <replace>handleEditLesion</replace>
+      <replace>current_lesion_index</replace>
+      <replace>handleAddLesion</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -463,7 +472,14 @@
       <option name="project" value="LOCAL" />
       <updated>1539223548513</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Corrected commenting after adding a lesion">
+      <created>1539224032034</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1539224032034</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TodoView">
@@ -477,9 +493,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="336" y="23" width="1344" height="1027" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.8835726" visible="true" weight="0.19662058" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.8835726" visible="true" weight="0.19969279" />
       <window_info id="Structure" order="1" sideWeight="0.11642743" side_tool="true" weight="0.20095694" />
       <window_info id="npm" order="2" sideWeight="0.272293" side_tool="true" weight="0.23374176" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -491,9 +506,9 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32941177" />
       <window_info anchor="bottom" id="Docker" order="7" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="8" sideWeight="0.49952874" visible="true" weight="0.32941177" />
+      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49952874" weight="0.32941177" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49952874" weight="0.32941177" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.49952874" visible="true" weight="0.32941177" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50047123" side_tool="true" weight="0.32941177" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.32941177" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -553,7 +568,8 @@
     <MESSAGE value="Properly replace str.includes with str.indexOf for ie11" />
     <MESSAGE value="Modified dropzone for ie11" />
     <MESSAGE value="Implemented lesion state once added a new lesion" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implemented lesion state once added a new lesion" />
+    <MESSAGE value="Corrected commenting after adding a lesion" />
+    <option name="LAST_COMMIT_MESSAGE" value="Corrected commenting after adding a lesion" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/App.css">
@@ -658,8 +674,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Lesions.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-821">
-          <caret line="25" selection-start-line="25" selection-end-line="25" />
+        <state relative-caret-position="239">
+          <caret line="17" column="54" selection-start-line="17" selection-start-column="54" selection-end-line="17" selection-end-column="54" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>
@@ -668,8 +684,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/App.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="63">
-          <caret line="20" column="26" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="26" />
+        <state relative-caret-position="3431">
+          <caret line="256" selection-start-line="256" selection-end-line="256" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>

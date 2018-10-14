@@ -12,9 +12,21 @@ import {schema_map, lexicon} from './data'
 
 
 export class LesionList extends Component {
+    constructor(props) {
+        super(props);
+
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick(idx) {
+        this.props.handleEditLesion(idx)
+    }
+
     render() {
         return this.props.lesions.map((lesion, idx) => (
-            <Lesion lesion={lesion} key={lesion.id} index={idx + 1}/>
+            <Lesion lesion={lesion} key={lesion.id} index={idx} handleEditButton={this.handleClick}
+                    handleDeleteButton={(idx) => this.props.handleDeleteLesion(idx)}
+            />
         ));
     }
 }
@@ -23,8 +35,14 @@ class Lesion extends Component {
     constructor(props) {
         super(props);
 
+        this.handleEditButton = this.handleEditButton.bind(this);
 
     }
+
+    handleEditButton() {
+        this.props.handleEditButton(this.props.index);
+    }
+
     render() {
         const lesion = this.props.lesion;
 
@@ -37,7 +55,7 @@ class Lesion extends Component {
         return (
             // todo: different presentation depending on lesion type
             <div>
-                <p>Lesion #{this.props.index}</p>
+                <p>Lesion #{this.props.index + 1}</p>
                 <ul>
                     <li>Zone: {zone}</li>
                     <li>Extension: {extension}</li>
@@ -47,7 +65,8 @@ class Lesion extends Component {
                     <li>Total: {scores.total}</li>
                     <li>Comment: {comment}</li>
                 </ul>
-                <Button onClick={this.handleClick}>Edit</Button>
+                <Button color='success' onClick={this.handleEditButton}>Edit</Button>
+                <Button color='danger' onClick={() => this.props.handleDeleteButton(this.props.index)}>Delete</Button>
             </div>
         )
     }
@@ -57,119 +76,51 @@ class Lesion extends Component {
 export class NewLesion extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            modal: false,
-            zone: null,
-            scores: {
-                't2w': 0,
-                'dwi': 0,
-                'dce': 0,
-                'total': 0,
-            },
-            extension: null,
-            comment: "",
-            images: [],
-        };
 
-        this.toggle = this.toggle.bind(this);
+        this.handleToggle = this.handleToggle.bind(this);
+        this.handleAddLesion = this.handleAddLesion.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleSelectLocation = this.handleSelectLocation.bind(this);
-        this.handleAssessmentChange = this.handleAssessmentChange.bind(this);
     }
 
-    toggle() {
-        this.setState({
-            modal: !this.state.modal,
-        })
+    handleToggle() {
+        this.props.handleToggleModal();
+    }
+
+    // todo: move to lesion list
+    handleAddLesion() {
+        this.props.handleEditLesion(null)
     }
 
     handleSubmit(e) {
-        const lesion = {
-            zone: this.state.zone,
-            scores: this.state.scores,
-            extension: this.state.extension,
-            comment: this.state.comment,
-            images: this.state.images,
-        };
-
-        this.props.addLesion(lesion);
-
-        this.setState({
-            modal: false,
-            zone: null,
-            scores: {
-                't2w': 0,
-                'dwi': 0,
-                'dce': 0,
-                'total': 0,
-            },
-            extension: null,
-            comment: "",
-            images: [],
-        });
+        this.props.handleLesionEdited(this.props.editing.current_lesion_index);
         e.preventDefault();
     }
 
-    handleSelectLocation(area) {
-        const raw_location = area.name;
-        let side, section, zone;
-
-        if (raw_location.indexOf('PZ') !== -1) {
-            zone = 'pz'
-        } else if (raw_location.indexOf('TZ') !== -1) {
-            zone = 'tz'
-        } else if (raw_location.indexOf('CZ') !== -1) {
-            zone = 'cz'
-        } else if (raw_location.indexOf('AS') !== -1) {
-            zone = 'as'
-        }
-
-
-        this.setState({
-            zone: zone,
-            location: raw_location,
-        })
-    }
-
-    handleAssessmentChange(type, results) {
-        if (type.indexOf('t2w') === 0) {
-            type = type.slice(0, 3)
-        }
-        if (type === 'comment' || type === 'extension') {
-            this.setState({
-                [type]: results,
-            })
-        } else {
-            this.setState(prevState => ({
-                scores: {
-                    ...prevState.scores,
-                    [type]: results,
-                }
-            }))
-        }
-    }
 
     render() {
         // todo: disable closure of modal on clicking
+        const lesion = this.props.editing.lesion;
+        const editing = this.props.editing.current_lesion_index !== null;
+
         return (
             <>
-                <Button color='primary' onClick={this.toggle}>
+                <Button color='primary' onClick={this.handleAddLesion}>
                     Add a lesion
                 </Button>
-                <Modal isOpen={this.state.modal} toggle={this.toggle} size="lg">
+                <Modal isOpen={this.props.editing.modal} toggle={this.handleToggle} size="lg">
                     <ModalBody>
                         <Form>
                             <Row className="justify-content-center">
                                 <Col lg={4}>
                                     <p>Step 1: select the anatomical location</p>
-                                    <SelectLocation onClick={this.handleSelectLocation} location={this.state.location}/>
+                                    <SelectLocation onClick={this.props.handleSelectLocation} location={lesion.location}/>
                                 </Col>
                                 <Col>
                                     <p>Step 2: enter the sequence lexicon</p>
-                                    <LesionAssessment zone={this.state.zone} scores={this.state.scores}
-                                                      comment={this.state.comment}
-                                                      extension={this.state.extension}
-                                                      onChange={this.handleAssessmentChange}/>
+                                    <LesionAssessment zone={lesion.zone} scores={lesion.scores}
+                                                      comment={lesion.comment}
+                                                      extension={lesion.extension}
+                                                      onChange={this.props.handleAssessmentChange}/>
                                 </Col>
                             </Row>
                             <Row>
@@ -183,7 +134,12 @@ export class NewLesion extends Component {
                                     <DropImage sequence="DCE"/>
                                 </Col>
                             </Row>
-                            <Button onClick={this.handleSubmit}>Add</Button>
+                            <Button onClick={this.handleSubmit}>
+                                {editing ? 'Edit' : 'Add'}
+                            </Button>
+                            <Button onClick={this.toggle}>
+                                Cancel
+                            </Button>
                         </Form>
                     </ModalBody>
                 </Modal>
@@ -195,15 +151,6 @@ export class NewLesion extends Component {
 class LesionAssessment extends Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            't2w_pz': 2,
-            'dwi': 3,
-            'dce': 1,
-            'total': 4,
-            'extension': '',
-            'comment': '',
-        };
 
         this.handleSelect = this.handleSelect.bind(this);
         this.handleYesNo = this.handleYesNo.bind(this);
@@ -242,14 +189,14 @@ class LesionAssessment extends Component {
         const assessment_categories = {
             pz: (
                 <>
-                    <DropdownSelection sequence="t2w_pz" value={scores.t2w_pz} handleSelect={this.handleSelect}/>
+                    <DropdownSelection sequence="t2w_pz" value={scores.t2w} handleSelect={this.handleSelect}/>
                     {dwi_dce_total}
                     {extension_and_comment}
                 </>
             ),
             tz: (
                 <>
-                    <DropdownSelection sequence="t2w_tz" value={scores.t2w_tz} handleSelect={this.handleSelect}/>
+                    <DropdownSelection sequence="t2w_tz" value={scores.t2w} handleSelect={this.handleSelect}/>
                     {dwi_dce_total}
                     {extension_and_comment}
                 </>
@@ -318,7 +265,7 @@ class TextArea extends Component {
             <FormGroup>
                 <Label>Comment
                     <Input type='textarea' placeholder={this.props.placeholder}
-                           value={this.props.content} onChange={this.handleChange}/>
+                           value={this.props.value} onChange={this.handleChange}/>
                 </Label>
             </FormGroup>
         )
