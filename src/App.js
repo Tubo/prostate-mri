@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import {Container, Row, Col, Input, Button} from 'reactstrap'
-import jsPDF from 'jspdf'
 
 import Navbar from './Navbar'
 import {LesionList, NewLesion} from './Lesions'
 import ClinicalContent from './ClinicalField'
+import {generateDoc} from "./DocumentGeneration";
 
 
 class App extends Component {
@@ -223,15 +223,7 @@ class App extends Component {
     }
 
     generateDoc() {
-        let doc = new jsPDF('portrait', 'mm', 'a4');
-        let clinical_information = [
-            this.state.history,
-            this.state.biopsy,
-        ];
-
-        doc.text(clinical_information, 10, 10)
-
-        doc.save('a4.pdf');
+        return generateDoc(this.state)
     }
 
     render() {
