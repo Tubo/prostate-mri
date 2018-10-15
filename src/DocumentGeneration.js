@@ -29,7 +29,7 @@ export function generateDoc(data) {
     doc.addParagraph(prostate_metrics_content);
 
     data.lesions.map(lesion => {
-
+        lesionDescription(lesion, doc)
     });
 
     downloadDocx(doc);
@@ -50,5 +50,9 @@ function lesionDescription(lesion, doc) {
         comment = lesion.comment;
 
     let paragraph = new docx.Paragraph(),
-        header = new docx.TextRun(zone)
+        header = new docx.TextRun(zone);
+
+    doc.createImage(images.t2w);
+
+
 }

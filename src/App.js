@@ -66,7 +66,6 @@ class App extends Component {
         this.setState({
             history: content,
         });
-        // this.documentTree()
     }
 
     onBiopsyChange(content) {

@@ -24,7 +24,10 @@ export class LesionList extends Component {
 
     render() {
         return this.props.lesions.map((lesion, idx) => (
-            <Lesion lesion={lesion} key={lesion.id} index={idx} handleEditButton={this.handleClick}
+            <Lesion lesion={lesion}
+                    key={lesion.id}
+                    index={idx}
+                    handleEditButton={this.handleClick}
                     handleDeleteButton={(idx) => this.props.handleDeleteLesion(idx)}
             />
         ));
@@ -34,7 +37,6 @@ export class LesionList extends Component {
 class Lesion extends Component {
     constructor(props) {
         super(props);
-
         this.handleEditButton = this.handleEditButton.bind(this);
 
     }
@@ -44,9 +46,8 @@ class Lesion extends Component {
     }
 
     render() {
-        const lesion = this.props.lesion;
-
-        const zone = lesion.zone,
+        const lesion = this.props.lesion,
+            zone = lesion.zone,
             scores = lesion.scores,
             extension = lesion.extension,
             comment = lesion.comment,
@@ -62,6 +63,7 @@ class Lesion extends Component {
                     <li>T2W: {scores.t2w}</li>
                     <li>DWI: {scores.dwi}</li>
                     <li>DCE: {scores.dce}</li>
+                    <li>Images: {Object.keys(images).length}</li>
                     <li>Total: {scores.total}</li>
                     <li>Comment: {comment}</li>
                 </ul>
@@ -113,7 +115,8 @@ export class NewLesion extends Component {
                             <Row className="justify-content-center">
                                 <Col lg={4}>
                                     <p>Step 1: select the anatomical location</p>
-                                    <SelectLocation onClick={this.props.handleSelectLocation} location={lesion.location}/>
+                                    <SelectLocation onClick={this.props.handleSelectLocation}
+                                                    location={lesion.location}/>
                                 </Col>
                                 <Col>
                                     <p>Step 2: enter the sequence lexicon</p>
@@ -125,17 +128,26 @@ export class NewLesion extends Component {
                             </Row>
                             <Row>
                                 <Col>
-                                    <DropImage sequence="T2"/>
+                                    <DropImage sequence="t2w"
+                                               handleNewImage={(seq, image) => (this.props.handleNewImage(seq, image))}
+                                               image={lesion.images.t2w}
+                                    />
                                 </Col>
                                 <Col>
-                                    <DropImage sequence="ADC"/>
+                                    <DropImage sequence="dwi"
+                                               handleNewImage={(seq, image) => (this.props.handleNewImage(seq, image))}
+                                               image={lesion.images.dwi}
+                                    />
                                 </Col>
                                 <Col>
-                                    <DropImage sequence="DCE"/>
+                                    <DropImage sequence="dce"
+                                               handleNewImage={(seq, image) => (this.props.handleNewImage(seq, image))}
+                                               image={lesion.images.dce}
+                                    />
                                 </Col>
                             </Row>
                             <Button onClick={this.handleSubmit}>
-                                {editing ? 'Edit' : 'Add'}
+                                {editing ? 'Save Edit' : 'Add'}
                             </Button>
                             <Button onClick={this.toggle}>
                                 Cancel
@@ -338,29 +350,20 @@ class SelectLocation extends Component {
 class DropImage extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            image: null,
-        };
-
         this.onDrop = this.onDrop.bind(this);
-
     }
 
     onDrop(files) {
-        // todo: need to uplift the state
-        console.log(files);
-        this.setState({
-            image: files,
-        })
+        this.props.handleNewImage(this.props.sequence, files[0]);
     }
 
     render() {
-        const image = this.state.image;
+        const image = this.props.image;
 
         if (image) {
             return (
                 <Dropzone disableClick={true} onDrop={this.onDrop}>
-                    <img src={image[0].preview} width={200} height={200}/>
+                    <img src={image.preview} width={200} height={200}/>
                 </Dropzone>
             )
         } else {
