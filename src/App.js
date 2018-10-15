@@ -46,8 +46,8 @@ class App extends Component {
             },
             extension: null,
             comment: "",
-            images: [],
-        }
+            images: {},
+        };
 
         this.onBiopsyChange = this.onBiopsyChange.bind(this);
         this.onHistoryChange = this.onHistoryChange.bind(this);
@@ -58,6 +58,7 @@ class App extends Component {
         this.handleToggleModal = this.handleToggleModal.bind(this);
         this.handleSelectLocation = this.handleSelectLocation.bind(this);
         this.handleAssessmentChange = this.handleAssessmentChange.bind(this);
+        this.handleNewImage = this.handleNewImage.bind(this);
         this.generateDoc = this.generateDoc.bind(this);
     }
 
@@ -102,7 +103,7 @@ class App extends Component {
                     },
                     extension: null,
                     comment: "",
-                    images: [],
+                    images: {},
                 }
             }
         })
@@ -190,7 +191,7 @@ class App extends Component {
 
     handleDeleteLesion(idx) {
         let lesions_list = [...this.state.lesions];
-        lesions_list.splice(idx, 1)
+        lesions_list.splice(idx, 1);
         this.setState({
             lesions: lesions_list,
         })
@@ -222,6 +223,21 @@ class App extends Component {
         });
     }
 
+    handleNewImage(seq, image) {
+        this.setState(prevState => ({
+            editing: {
+                ...prevState.editing,
+                lesion: {
+                    ...prevState.editing.lesion,
+                    images: {
+                        ...prevState.editing.lesion.images,
+                        [seq]: image,
+                    }
+                }
+            }
+        }))
+    }
+
     generateDoc() {
         return generateDoc(this.state)
     }
@@ -237,6 +253,7 @@ class App extends Component {
             handleToggleModal: this.handleToggleModal,
             handleAssessmentChange: this.handleAssessmentChange,
             handleSelectLocation: this.handleSelectLocation,
+            handleNewImage: this.handleNewImage,
             generateDoc: this.generateDoc,
             volume: this.state.volume,
         };
@@ -279,6 +296,7 @@ class MainContent
             handleToggleModal = this.props.clinical.handleToggleModal,
             handleAssessmentChange = this.props.clinical.handleAssessmentChange,
             handleSelectLocation = this.props.clinical.handleSelectLocation,
+            handleNewImage = this.props.clinical.handleNewImage,
             generateDoc = this.props.clinical.generateDoc,
             volume = this.props.clinical.volume;
 
@@ -300,6 +318,7 @@ class MainContent
                            handleEditLesion={handleEditLesion}
                            handleAssessmentChange={handleAssessmentChange}
                            handleSelectLocation={handleSelectLocation}
+                           handleNewImage={handleNewImage}
                 />
                 <Button color="danger">Reset</Button>
                 <Button color="success" onClick={() => generateDoc()}>Generate</Button>

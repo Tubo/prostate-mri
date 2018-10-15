@@ -7,6 +7,11 @@ import saveAs from 'file-saver'
 export function generateDoc(data) {
     let doc = new docx.Document();
 
+    doc.Header.createParagraph('MRI Prostate report');
+
+    let title = new docx.Paragraph('Prostate MRI Report').title().center();
+    doc.addParagraph(title);
+
     let history_heading = new docx.Paragraph('Clinical History').heading1();
     doc.addParagraph(history_heading);
     let history_content = new docx.Paragraph(data.history);
@@ -23,11 +28,27 @@ export function generateDoc(data) {
     let prostate_metrics_content = new docx.Paragraph(prostate_metrics_wording);
     doc.addParagraph(prostate_metrics_content);
 
+    data.lesions.map(lesion => {
 
+    });
 
+    downloadDocx(doc);
+}
+
+function downloadDocx(doc) {
     let exporter = new docx.Packer();
     exporter.toBlob(doc).then(blob => {
         saveAs(blob, 'report.docx');
     })
 }
 
+function lesionDescription(lesion, doc) {
+    let images = lesion.images,
+        zone = lesion.zone,
+        scores = lesion.scores,
+        extension = lesion.extension,
+        comment = lesion.comment;
+
+    let paragraph = new docx.Paragraph(),
+        header = new docx.TextRun(zone)
+}
