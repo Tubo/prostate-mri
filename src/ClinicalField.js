@@ -22,6 +22,7 @@ class ClinicalField extends Component {
     }
 }
 
+// todo make text area bigger
 class TextArea extends Component {
     constructor(props) {
         super(props);

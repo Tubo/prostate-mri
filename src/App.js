@@ -109,7 +109,6 @@ class App extends Component {
         })
     }
 
-    //todo change state name to editing
     handleAssessmentChange(type, results) {
         if (type.indexOf('t2w') === 0) {
             type = type.slice(0, 3)
