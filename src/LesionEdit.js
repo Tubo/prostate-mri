@@ -8,72 +8,6 @@ import Dropzone from 'react-dropzone'
 import schematic from './schematic.png'
 import {schema_map, lexicon} from './data'
 
-// todo: refactor into better component organisation
-
-
-export class LesionList extends Component {
-    constructor(props) {
-        super(props);
-
-        this.handleClick = this.handleClick.bind(this);
-    }
-
-    handleClick(idx) {
-        this.props.handleEditLesion(idx)
-    }
-
-    render() {
-        return this.props.lesions.map((lesion, idx) => (
-            <Lesion lesion={lesion}
-                    key={lesion.id}
-                    index={idx}
-                    handleEditButton={this.handleClick}
-                    handleDeleteButton={(idx) => this.props.handleDeleteLesion(idx)}
-            />
-        ));
-    }
-}
-
-class Lesion extends Component {
-    constructor(props) {
-        super(props);
-        this.handleEditButton = this.handleEditButton.bind(this);
-
-    }
-
-    handleEditButton() {
-        this.props.handleEditButton(this.props.index);
-    }
-
-    render() {
-        const lesion = this.props.lesion,
-            zone = lesion.zone,
-            scores = lesion.scores,
-            extension = lesion.extension,
-            comment = lesion.comment,
-            images = lesion.images;
-
-        return (
-            // todo: different presentation depending on lesion type
-            <div>
-                <p>Lesion #{this.props.index + 1}</p>
-                <ul>
-                    <li>Zone: {zone}</li>
-                    <li>Extension: {extension}</li>
-                    <li>T2W: {scores.t2w}</li>
-                    <li>DWI: {scores.dwi}</li>
-                    <li>DCE: {scores.dce}</li>
-                    <li>Images: {Object.keys(images).length}</li>
-                    <li>Total: {scores.total}</li>
-                    <li>Comment: {comment}</li>
-                </ul>
-                <Button color='success' onClick={this.handleEditButton}>Edit</Button>
-                <Button color='danger' onClick={() => this.props.handleDeleteButton(this.props.index)}>Delete</Button>
-            </div>
-        )
-    }
-}
-
 
 export class NewLesion extends Component {
     constructor(props) {
@@ -127,29 +61,12 @@ export class NewLesion extends Component {
                                 </Col>
                             </Row>
                             <Row>
-                                <Col>
-                                    <DropImage sequence="t2w"
-                                               handleNewImage={(seq, image) => (this.props.handleNewImage(seq, image))}
-                                               image={lesion.images.t2w}
-                                    />
-                                </Col>
-                                <Col>
-                                    <DropImage sequence="dwi"
-                                               handleNewImage={(seq, image) => (this.props.handleNewImage(seq, image))}
-                                               image={lesion.images.dwi}
-                                    />
-                                </Col>
-                                <Col>
-                                    <DropImage sequence="dce"
-                                               handleNewImage={(seq, image) => (this.props.handleNewImage(seq, image))}
-                                               image={lesion.images.dce}
-                                    />
-                                </Col>
+                                <ImageUploadContainer handleNewImage={this.props.handleNewImage} lesion={lesion}/>
                             </Row>
                             <Button onClick={this.handleSubmit}>
-                                {editing ? 'Save Edit' : 'Add'}
+                                {editing ? 'Save' : 'Add'}
                             </Button>
-                            <Button onClick={this.toggle}>
+                            <Button onClick={this.handleToggle}>
                                 Cancel
                             </Button>
                         </Form>
@@ -346,17 +263,24 @@ class SelectLocation extends Component {
     }
 }
 
-
-class DropImage extends Component {
-    constructor(props) {
-        super(props);
-        this.onDrop = this.onDrop.bind(this);
+class ImageUploadContainer extends Component {
+    render() {
+        return (
+            ['t2w', 'dwi', 'dce'].map(seq => {
+                return (
+                    <Col>
+                        <ImageUpload sequence={seq}
+                                     handleNewImage={(seq, image) => (this.props.handleNewImage(seq, image))}
+                                     image={this.props.lesion.images[seq]}
+                        />
+                    </Col>
+                )
+            })
+        )
     }
+}
 
-    onDrop(files) {
-        this.props.handleNewImage(this.props.sequence, files[0]);
-    }
-
+class ImageUpload extends Component {
     render() {
         const image = this.props.image;
 
@@ -369,7 +293,9 @@ class DropImage extends Component {
         } else {
             return (
                 <Dropzone disableClick={false}
-                          onDrop={this.onDrop}
+                          onDrop={(files) => {
+                              this.props.handleNewImage(this.props.sequence, files[0])
+                          }}
                           multiple={false}>
                     {this.props.sequence}
                 </Dropzone>

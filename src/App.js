@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
-import {Container, Row, Col, Input, Button} from 'reactstrap'
+import {Container, Row, Col, Button} from 'reactstrap'
 
 import Navbar from './Navbar'
-import {LesionList, NewLesion} from './Lesions'
+import {NewLesion} from './LesionEdit'
+import {LesionList} from './LesionsList'
 import ClinicalContent from './ClinicalField'
 import {generateDoc} from "./DocumentGeneration";
 
