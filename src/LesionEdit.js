@@ -54,7 +54,9 @@ export class EditLesion extends Component {
                             <Col>
                                 <h4 className="text-center mb-4">Step 3: Upload images</h4>
                                 <Row className="justify-content-center">
-                                    <ImageUploadContainer handleNewImage={this.props.handleNewImage} lesion={lesion}/>
+                                    <ImageUploadContainer handleNewImage={this.props.handleNewImage}
+                                                          handleImageSliceNumber={this.props.handleImageSliceNumber}
+                                                          lesion={lesion}/>
                                 </Row>
                             </Col>
                         </Row>
@@ -287,7 +289,9 @@ class ImageUploadContainer extends Component {
                                      image={this.props.lesion.images[seq]}
                         />
                         </div>
-                        <Input className="w-50 text-center mx-auto my-2" bsSize="sm" value="Slice number"/>
+                        <Input className="w-50 text-center mx-auto my-2" bsSize="sm" placeholder="Slice number"
+                               onChange={(e) => this.props.handleImageSliceNumber(seq, e.target.value)}
+                        />
                     </Col>
                 )
             })

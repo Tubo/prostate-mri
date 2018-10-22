@@ -35,6 +35,7 @@ class App extends Component {
                     extension: null,
                     comment: "",
                     images: {},
+                    images_number: {}
                 }
             },
         };
@@ -63,6 +64,7 @@ class App extends Component {
         this.handleSelectLocation = this.handleSelectLocation.bind(this);
         this.handleAssessmentChange = this.handleAssessmentChange.bind(this);
         this.handleNewImage = this.handleNewImage.bind(this);
+        this.handleImageSliceNumber = this.handleImageSliceNumber.bind(this);
         this.generateDoc = this.generateDoc.bind(this);
     }
 
@@ -238,6 +240,21 @@ class App extends Component {
         }))
     }
 
+    handleImageSliceNumber(seq, number) {
+        this.setState(prevState => ({
+            editing: {
+                ...prevState.editing,
+                lesion: {
+                    ...prevState.editing.lesion,
+                    images_number: {
+                        ...prevState.editing.lesion.images_number,
+                        [seq]: number,
+                    }
+                }
+            }
+        }))
+    }
+
     generateDoc() {
         return generateDoc(this.state)
     }
@@ -246,15 +263,20 @@ class App extends Component {
         const props = {
             onHistoryChange: this.onHistoryChange,
             onBiopsyChange: this.onBiopsyChange,
-            onAssessmentChange: this.onAssessmentChange,
+
             onDimChange: this.onDimChange,
+            onAssessmentChange: this.onAssessmentChange,
+
             handleLesionEdited: this.handleLesionEdited,
             handleEditLesion: this.handleEditLesion,
             handleDeleteLesion: this.handleDeleteLesion,
             handleToggleModal: this.handleToggleModal,
             handleAssessmentChange: this.handleAssessmentChange,
             handleSelectLocation: this.handleSelectLocation,
+
             handleNewImage: this.handleNewImage,
+            handleImageSliceNumber: this.handleImageSliceNumber,
+
             generateDoc: this.generateDoc,
 
             volume: this.state.volume,
@@ -298,6 +320,7 @@ class MainContent extends Component {
             handleAssessmentChange: this.props.handleAssessmentChange,
             handleSelectLocation: this.props.handleSelectLocation,
             handleNewImage: this.props.handleNewImage,
+            handleImageSliceNumber: this.props.handleImageSliceNumber,
             editing: this.props.editing,
         };
 
