@@ -4,8 +4,9 @@ import {Container, Row, Col, Button} from 'reactstrap'
 import Navbar from './Navbar'
 import {NewLesion} from './LesionEdit'
 import {LesionList} from './LesionsList'
-import ClinicalContent from './ClinicalField'
-import {generateDoc} from "./DocumentGeneration";
+import ClinicalContent from './ClinicalContent'
+import ProstateAssessment from './ProstateAssessment'
+import generateDoc from "./DocumentGeneration"
 
 
 class App extends Component {
@@ -19,6 +20,7 @@ class App extends Component {
             dim_y: 0,
             dim_z: 0,
             lesions: [],
+            assessments: {},
             editing: {
                 modal: false,
                 current_lesion_index: null,
@@ -32,7 +34,7 @@ class App extends Component {
                     },
                     extension: null,
                     comment: "",
-                    images: [],
+                    images: {},
                 }
             },
         };
@@ -52,6 +54,7 @@ class App extends Component {
 
         this.onBiopsyChange = this.onBiopsyChange.bind(this);
         this.onHistoryChange = this.onHistoryChange.bind(this);
+        this.onAssessmentChange = this.onAssessmentChange.bind(this);
         this.onDimChange = this.onDimChange.bind(this);
         this.handleLesionEdited = this.handleLesionEdited.bind(this);
         this.handleEditLesion = this.handleEditLesion.bind(this);
@@ -75,6 +78,15 @@ class App extends Component {
         })
     }
 
+    onAssessmentChange(content, type) {
+        this.setState(prevState => ({
+            assessments: {
+                ...prevState.assessments,
+                [type]: content,
+            }
+        }))
+    }
+
     onDimChange(dim, value) {
         this.setState({
             [dim]: value,
@@ -82,7 +94,7 @@ class App extends Component {
 
         this.setState(state => {
                 return {
-                    volume: Math.round(state.dim_x * state.dim_y * state.dim_z * 0.52 * 100) / 100
+                    volume: Math.round(state.dim_x * state.dim_y * state.dim_z * 0.52 * 10) / 10
                 }
             }
         )
@@ -93,18 +105,7 @@ class App extends Component {
             editing: {
                 modal: false,
                 current_lesion_index: null,
-                lesion: {
-                    zone: null,
-                    scores: {
-                        't2w': 0,
-                        'dwi': 0,
-                        'dce': 0,
-                        'total': 0,
-                    },
-                    extension: null,
-                    comment: "",
-                    images: {},
-                }
+                lesion: this.defaultNewLesion,
             }
         })
     }
@@ -242,9 +243,10 @@ class App extends Component {
     }
 
     render() {
-        let handlers = {
+        const props = {
             onHistoryChange: this.onHistoryChange,
             onBiopsyChange: this.onBiopsyChange,
+            onAssessmentChange: this.onAssessmentChange,
             onDimChange: this.onDimChange,
             handleLesionEdited: this.handleLesionEdited,
             handleEditLesion: this.handleEditLesion,
@@ -254,73 +256,71 @@ class App extends Component {
             handleSelectLocation: this.handleSelectLocation,
             handleNewImage: this.handleNewImage,
             generateDoc: this.generateDoc,
+
             volume: this.state.volume,
+            lesions: this.state.lesions,
+            editing: this.state.editing,
         };
-        let lesions = this.state.lesions,
-            editing = this.state.editing;
 
         return (
             <>
                 <Navbar/>
                 <Container className="mt-4">
-                    <Row>
-                        <Col>
-                            <MainContent
-                                clinical={handlers}
-                                lesions={lesions}
-                                editing={editing}
-                            />
-                        </Col>
-                    </Row>
+                    <MainContent {...props} />
                 </Container>
             </>
         );
     }
 }
 
-class MainContent
-    extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-
+class MainContent extends Component {
     render() {
-        let onHistoryChange = this.props.clinical.onHistoryChange,
-            onBiopsyChange = this.props.clinical.onBiopsyChange,
-            onDimChange = this.props.clinical.onDimChange,
-            handleLesionEdited = this.props.clinical.handleLesionEdited,
-            handleEditLesion = this.props.clinical.handleEditLesion,
-            handleDeleteLesion = this.props.clinical.handleDeleteLesion,
-            handleToggleModal = this.props.clinical.handleToggleModal,
-            handleAssessmentChange = this.props.clinical.handleAssessmentChange,
-            handleSelectLocation = this.props.clinical.handleSelectLocation,
-            handleNewImage = this.props.clinical.handleNewImage,
-            generateDoc = this.props.clinical.generateDoc,
-            volume = this.props.clinical.volume;
+        const clinical_props = {
+            onHistoryChange: this.props.onHistoryChange,
+            onBiopsyChange: this.props.onBiopsyChange,
+        };
+
+        const prostate_assessment_props = {
+            onDimChange: this.props.onDimChange,
+            onAssessmentChange: this.props.onAssessmentChange,
+            volume: this.props.volume,
+        };
+
+        const lesion_list_props = {
+            lesions: this.props.lesions,
+            handleEditLesion: this.props.handleEditLesion,
+            handleDeleteLesion: this.props.handleDeleteLesion,
+        };
+
+        const edit_lesion_props = {
+            handleLesionEdited: this.props.handleLesionEdited,
+            handleToggleModal: this.props.handleToggleModal,
+            handleAssessmentChange: this.props.handleAssessmentChange,
+            handleSelectLocation: this.props.handleSelectLocation,
+            handleNewImage: this.props.handleNewImage,
+            editing: this.props.editing,
+        };
+
+        const generateDoc = this.props.generateDoc,
+            handleEditLesion = this.props.handleEditLesion;
 
         return (
             <>
-                <ClinicalContent
-                    onHistoryChange={onHistoryChange}
-                    onBiopsyChange={onBiopsyChange}
-                    onDimChange={onDimChange}
-                    volume={volume}
-                />
-                <LesionList lesions={this.props.lesions}
-                            handleEditLesion={handleEditLesion}
-                            handleDeleteLesion={handleDeleteLesion}
-                />
-                <NewLesion editing={this.props.editing}
-                           handleLesionEdited={handleLesionEdited}
-                           handleToggleModal={handleToggleModal}
-                           handleEditLesion={handleEditLesion}
-                           handleAssessmentChange={handleAssessmentChange}
-                           handleSelectLocation={handleSelectLocation}
-                           handleNewImage={handleNewImage}
-                />
-                <Button color="danger">Reset</Button>
-                <Button color="success" onClick={() => generateDoc()}>Generate</Button>
+                <h1 className="mb-4">Clinical background</h1>
+                <ClinicalContent {...clinical_props} />
+                <h1 className="mb-4">Prostate assessment</h1>
+                <ProstateAssessment {...prostate_assessment_props} />
+                <h1 className="mb-4">List of lesions</h1>
+                <LesionList {...lesion_list_props} />
+
+                <NewLesion {...edit_lesion_props} />
+                <Row className="justify-content-center mb-5">
+                    <Col md={5} className="text-center">
+                        <Button color='primary' onClick={() => handleEditLesion(null)}>New lesion</Button>
+                        <Button color="success" onClick={() => generateDoc()}>Generate</Button>
+                        <Button color="danger">Clear all</Button>
+                    </Col>
+                </Row>
             </>
         )
     }

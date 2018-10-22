@@ -14,17 +14,11 @@ export class NewLesion extends Component {
         super(props);
 
         this.handleToggle = this.handleToggle.bind(this);
-        this.handleAddLesion = this.handleAddLesion.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleToggle() {
         this.props.handleToggleModal();
-    }
-
-    // todo: move to lesion list
-    handleAddLesion() {
-        this.props.handleEditLesion(null)
     }
 
     handleSubmit(e) {
@@ -39,40 +33,44 @@ export class NewLesion extends Component {
         const editing = this.props.editing.current_lesion_index !== null;
 
         return (
-            <>
-                <Button color='primary' onClick={this.handleAddLesion}>
-                    Add a lesion
-                </Button>
-                <Modal isOpen={this.props.editing.modal} toggle={this.handleToggle} size="lg">
-                    <ModalBody>
-                        <Form>
-                            <Row className="justify-content-center">
-                                <Col lg={4}>
-                                    <p>Step 1: select the anatomical location</p>
-                                    <SelectLocation onClick={this.props.handleSelectLocation}
-                                                    location={lesion.location}/>
-                                </Col>
-                                <Col>
-                                    <p>Step 2: enter the sequence lexicon</p>
-                                    <LesionAssessment zone={lesion.zone} scores={lesion.scores}
-                                                      comment={lesion.comment}
-                                                      extension={lesion.extension}
-                                                      onChange={this.props.handleAssessmentChange}/>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <ImageUploadContainer handleNewImage={this.props.handleNewImage} lesion={lesion}/>
-                            </Row>
-                            <Button onClick={this.handleSubmit}>
-                                {editing ? 'Save' : 'Add'}
-                            </Button>
-                            <Button onClick={this.handleToggle}>
-                                Cancel
-                            </Button>
-                        </Form>
-                    </ModalBody>
-                </Modal>
-            </>
+            <Modal isOpen={this.props.editing.modal} toggle={this.handleToggle} size="lg">
+                <ModalBody>
+                    <Form>
+                        <Row className="mb-5">
+                            <Col md={4}>
+                                <h4>Step 1: Select location</h4>
+                                <SelectLocation onClick={this.props.handleSelectLocation}
+                                                location={lesion.location}/>
+                            </Col>
+                            <Col md={8}>
+                                <h4>Step 2: Score the lesion</h4>
+                                <LesionAssessment zone={lesion.zone} scores={lesion.scores}
+                                                  comment={lesion.comment}
+                                                  extension={lesion.extension}
+                                                  onChange={this.props.handleAssessmentChange}/>
+                            </Col>
+                        </Row>
+                        <Row className="justify-content-center">
+                            <Col>
+                                <h4>Step 3: Upload images</h4>
+                                <Row>
+                                    <ImageUploadContainer handleNewImage={this.props.handleNewImage} lesion={lesion}/>
+                                </Row>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col md={6}>
+                                <Button onClick={this.handleSubmit}>
+                                    {editing ? 'Save' : 'Add'}
+                                </Button>
+                                <Button onClick={this.handleToggle}>
+                                    Cancel
+                                </Button>
+                            </Col>
+                        </Row>
+                    </Form>
+                </ModalBody>
+            </Modal>
         )
     }
 }
@@ -111,32 +109,45 @@ class LesionAssessment extends Component {
         const extension_and_comment = (
             <>
                 <YesNoSelection value={this.props.extension} handleChange={this.handleYesNo}/>
-                <TextArea value={this.props.comment} handleChange={this.handleComment}/>
+                <Input type="textarea" value={this.props.comment || "Comment"} handleChange={this.handleComment}/>
             </>
         );
 
         const assessment_categories = {
             pz: (
-                <>
+                <Col>
                     <DropdownSelection sequence="t2w_pz" value={scores.t2w} handleSelect={this.handleSelect}/>
                     {dwi_dce_total}
                     {extension_and_comment}
-                </>
+                </Col>
             ),
             tz: (
-                <>
+                <Col>
                     <DropdownSelection sequence="t2w_tz" value={scores.t2w} handleSelect={this.handleSelect}/>
                     {dwi_dce_total}
                     {extension_and_comment}
-                </>
+                </Col>
             ),
-            cz: extension_and_comment,
-            as: extension_and_comment
+            cz: (
+                <Col>
+                    {extension_and_comment}
+                </Col>
+            ),
+            as: (
+                <Col>
+                    {extension_and_comment}
+                </Col>
+            )
         };
 
         if (zone) {
-            return assessment_categories[zone];
+            return (
+                <Row>
+                    {assessment_categories[zone]}
+                </Row>
+            )
         }
+        ;
 
         return (
             <p>No lesion selected</p>
@@ -255,10 +266,11 @@ class SelectLocation extends Component {
     render() {
 
         return (
-            <>
-                <ImageMapper src={schematic} map={this.MAP} onClick={this.handleClick}/>
-                <p>Location: {this.props.location || 'not selected'}</p>
-            </>
+            <figure className="figure">
+                <ImageMapper className="figure-img" src={schematic} map={this.MAP} onClick={this.handleClick}/>
+                <figcaption
+                    className="figure-caption text-center">Location: {this.props.location || 'not selected'}</figcaption>
+            </figure>
         )
     }
 }
@@ -287,7 +299,7 @@ class ImageUpload extends Component {
         if (image) {
             return (
                 <Dropzone disableClick={true} onDrop={this.onDrop}>
-                    <img src={image.preview} width={200} height={200}/>
+                    <img src={image.preview} width={200}/>
                 </Dropzone>
             )
         } else {
@@ -297,7 +309,7 @@ class ImageUpload extends Component {
                               this.props.handleNewImage(this.props.sequence, files[0])
                           }}
                           multiple={false}>
-                    {this.props.sequence}
+                    <p className="text-center">{this.props.sequence}</p>
                 </Dropzone>
             )
         }

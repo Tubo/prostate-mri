@@ -4,7 +4,7 @@ import saveAs from 'file-saver'
 
 // Create styles
 
-export function generateDoc(data) {
+export default function generateDoc(data) {
     let doc = new docx.Document();
 
     doc.Header.createParagraph('MRI Prostate report');

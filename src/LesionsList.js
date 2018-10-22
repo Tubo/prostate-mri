@@ -15,7 +15,7 @@ export class LesionList extends Component {
         ));
 
         return (
-            <Table className="mb-3">
+            <Table className="mb-5">
                 <thead>
                 <tr className="text-center">
                     <th>#</th>
