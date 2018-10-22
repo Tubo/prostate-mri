@@ -9,7 +9,7 @@ import schematic from './schematic.png'
 import {schema_map, lexicon} from './data'
 
 
-export class NewLesion extends Component {
+export class EditLesion extends Component {
     constructor(props) {
         super(props);
 
@@ -38,12 +38,12 @@ export class NewLesion extends Component {
                     <Form>
                         <Row className="mb-5">
                             <Col md={4}>
-                                <h4>Step 1: Select location</h4>
+                                <h4 className="text-center mb-4">Step 1: Select location</h4>
                                 <SelectLocation onClick={this.props.handleSelectLocation}
                                                 location={lesion.location}/>
                             </Col>
                             <Col md={8}>
-                                <h4>Step 2: Score the lesion</h4>
+                                <h4 className="text-center mb-2">Step 2: Score the lesion</h4>
                                 <LesionAssessment zone={lesion.zone} scores={lesion.scores}
                                                   comment={lesion.comment}
                                                   extension={lesion.extension}
@@ -52,14 +52,14 @@ export class NewLesion extends Component {
                         </Row>
                         <Row className="justify-content-center">
                             <Col>
-                                <h4>Step 3: Upload images</h4>
-                                <Row>
+                                <h4 className="text-center mb-4">Step 3: Upload images</h4>
+                                <Row className="justify-content-center">
                                     <ImageUploadContainer handleNewImage={this.props.handleNewImage} lesion={lesion}/>
                                 </Row>
                             </Col>
                         </Row>
-                        <Row>
-                            <Col md={6}>
+                        <Row className="justify-content-center">
+                            <Col md={4} className="text-center">
                                 <Button onClick={this.handleSubmit}>
                                     {editing ? 'Save' : 'Add'}
                                 </Button>
@@ -150,7 +150,7 @@ class LesionAssessment extends Component {
         ;
 
         return (
-            <p>No lesion selected</p>
+            <p className="text-center">Please select the lesion location first</p>
         )
     }
 }
@@ -280,11 +280,14 @@ class ImageUploadContainer extends Component {
         return (
             ['t2w', 'dwi', 'dce'].map(seq => {
                 return (
-                    <Col>
+                    <Col className="text-center">
+                        <div className="ml-3">
                         <ImageUpload sequence={seq}
                                      handleNewImage={(seq, image) => (this.props.handleNewImage(seq, image))}
                                      image={this.props.lesion.images[seq]}
                         />
+                        </div>
+                        <Input className="w-50 text-center mx-auto my-2" bsSize="sm" value="Slice number"/>
                     </Col>
                 )
             })
@@ -308,8 +311,9 @@ class ImageUpload extends Component {
                           onDrop={(files) => {
                               this.props.handleNewImage(this.props.sequence, files[0])
                           }}
-                          multiple={false}>
-                    <p className="text-center">{this.props.sequence}</p>
+                          multiple={false}
+                >
+                    <h6 className="text-center h-100" style={{lineHeight: "185px", textTransform: "uppercase"}}>{this.props.sequence}</h6>
                 </Dropzone>
             )
         }

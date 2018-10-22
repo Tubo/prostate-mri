@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Container, Row, Col, Button} from 'reactstrap'
 
 import Navbar from './Navbar'
-import {NewLesion} from './LesionEdit'
+import {EditLesion} from './LesionEdit'
 import {LesionList} from './LesionsList'
 import ClinicalContent from './ClinicalContent'
 import ProstateAssessment from './ProstateAssessment'
@@ -313,7 +313,7 @@ class MainContent extends Component {
                 <h1 className="mb-4">List of lesions</h1>
                 <LesionList {...lesion_list_props} />
 
-                <NewLesion {...edit_lesion_props} />
+                <EditLesion {...edit_lesion_props} />
                 <Row className="justify-content-center mb-5">
                     <Col md={5} className="text-center">
                         <Button color='primary' onClick={() => handleEditLesion(null)}>New lesion</Button>
