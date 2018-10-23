@@ -1,61 +1,52 @@
 import React, {Component} from 'react';
-import * as docx from 'docx';
 import saveAs from 'file-saver'
+import JSZip from 'jszip'
+import JSZipUtils from 'jszip-utils'
+import Docxtemplater from 'docxtemplater'
 
-// Create styles
+import template from "./report_template.docx"
+
 
 export default function generateDoc(data) {
-    const doc = new docx.Document();
-
-    doc.Header.createParagraph('NHI: ');
-
-    doc.addParagraph(heading('title', 'Prostate MRI Report').center());
-
-    doc.addParagraph(heading('heading1', 'Clinical History'));
-    let history_content = new docx.Paragraph(data.history);
-    doc.addParagraph(history_content);
-
-    doc.addParagraph(heading('heading1', 'Biopsy Results'));
-    let biopsy_content = new docx.Paragraph(data.biopsy);
-    doc.addParagraph(biopsy_content);
-
-    doc.addParagraph(heading('heading1', 'Prostate Assessment'));
-    let prostate_metrics_wording = `Volume ${data.volume || "N/A"}, dimension: ${data.dim_x}, ${data.dim_y}, ${data.dim_z}`
-    let prostate_metrics_content = new docx.Paragraph(prostate_metrics_wording);
-    doc.addParagraph(prostate_metrics_content);
-
-    doc.addParagraph(heading('heading1', 'Lesions'));
-    data.lesions.map(lesion => {
-        appendLesionDescription(doc, lesion)
-    });
-
-    downloadDocx(doc);
+    generate_document(data);
 }
 
-function downloadDocx(doc) {
-    let exporter = new docx.Packer();
-    exporter.toBlob(doc).then(blob => {
-        saveAs(blob, 'report.docx');
+function loadFile(url,callback){
+    JSZipUtils.getBinaryContent(url,callback);
+}
+
+function generate_document() {
+    loadFile(template, function(error,content){
+        if (error) { throw error }
+
+        const zip = new JSZip(content),
+            doc=new Docxtemplater().loadZip(zip);
+
+        doc.setData({
+            name: 'John',
+            last_name: 'Doe',
+            phone: '0652455478',
+            description: 'New Website'
+        });
+        try {
+            // render the document (replace all occurences of {first_name} by John, {last_name} by Doe, ...)
+            doc.render()
+        }
+        catch (error) {
+            var e = {
+                message: error.message,
+                name: error.name,
+                stack: error.stack,
+                properties: error.properties,
+            }
+            console.log(JSON.stringify({error: e}));
+            // The error thrown here contains additional information when logged with JSON.stringify (it contains a property object).
+            throw error;
+        }
+        var out=doc.getZip().generate({
+            type:"blob",
+            mimeType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        })
+        saveAs(out,"report.docx")
     })
-}
-
-function heading(level, text) {
-    return new docx.Paragraph(text)[level]();
-}
-
-
-function appendLesionDescription(doc, lesion) {
-    const images = lesion.images,
-        images_number = lesions.images_number,
-        zone = lesion.zone,
-        scores = lesion.scores,
-        extension = lesion.extension,
-        comment = lesion.comment;
-
-    let paragraph = new docx.Paragraph(),
-        header = new docx.TextRun(zone);
-
-    doc.createImage(images.t2w);
-    doc.createImage(images.dwi);
-    doc.createImage(images.dce);
 }
