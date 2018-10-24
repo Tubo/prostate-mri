@@ -8,6 +8,7 @@
     "file-saver": "^2.0.0-rc.3",
     "jszip": "^2.6.1",
     "jszip-utils": "0.0.2",
+    "open-docxtemplater-image-module": "^1.0.3",
     "react": "^16.5.2",
     "react-app-polyfill": "^0.1.3",
     "react-dom": "^16.5.2",
