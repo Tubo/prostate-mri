@@ -246,9 +246,9 @@ class App extends Component {
                 ...prevState.editing,
                 lesion: {
                     ...prevState.editing.lesion,
-                    images_number: {
-                        ...prevState.editing.lesion.images_number,
-                        [seq]: number,
+                    images: {
+                        ...prevState.editing.lesion.images,
+                        [seq + '_number']: number,
                     }
                 }
             }

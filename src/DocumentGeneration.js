@@ -9,7 +9,9 @@ import ImageModule from 'open-docxtemplater-image-module'
 import template from "./report_template.docx"
 
 
-export default async function generate_document(data) {
+export default async function generate_document(state_data) {
+    const data = Object.assign({}, state_data);
+
     for (let i=0; i<data.lesions.length; i++) {
         let lesion = data.lesions[i];
         let images = lesion.images;
@@ -39,12 +41,13 @@ function load_render_download(data) {
         const imageModule = new ImageModule({
             centered: false,
             getImage: (file) => file,
-            getSize: () => [200, 200],
+            getSize: () => [250, 250],
         });
         const doc = new Docxtemplater()
             .attachModule(imageModule)
-            .loadZip(zip);
+            .loadZip(zip)
 
+        doc.setOptions({parser: index_parser})
         doc.setData(data);
         doc.render();
 
@@ -56,3 +59,14 @@ function load_render_download(data) {
     })
 }
 
+function index_parser(tag) {
+    return {
+        get(scope, context) {
+            if (tag === "$index") {
+                const indexes = context.scopePathItem;
+                return indexes[indexes.length - 1] + 1;
+            }
+            return scope[tag];
+        },
+    };
+}

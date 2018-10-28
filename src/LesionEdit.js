@@ -8,6 +8,7 @@ import Dropzone from 'react-dropzone'
 
 import schematic from './schematic.png'
 import {schema_map, lexicon} from './data'
+import TextArea from "./components/TextArea";
 
 
 export class EditLesion extends Component {
@@ -112,7 +113,7 @@ class LesionAssessment extends Component {
         const extension_and_comment = (
             <>
                 <YesNoSelection value={this.props.extension} handleChange={this.handleYesNo}/>
-                <Input type="textarea" value={this.props.comment || "Comment"} handleChange={this.handleComment}/>
+                <Comment value={this.props.comment} handleChange={this.handleComment}/>
             </>
         );
 
@@ -191,26 +192,20 @@ class DropdownSelection extends Component {
     }
 }
 
-class TextArea extends Component {
+class Comment extends Component {
     constructor(props) {
         super(props);
 
         this.handleChange = this.handleChange.bind(this);
     }
 
-    handleChange(e) {
-        let content = e.target.value;
+    handleChange(content, type) {
         this.props.handleChange(content)
     }
 
     render() {
         return (
-            <FormGroup>
-                <Label>Comment
-                    <Input type='textarea' placeholder={this.props.placeholder}
-                           value={this.props.value} onChange={this.handleChange}/>
-                </Label>
-            </FormGroup>
+            <TextArea placeholder="Comment" content={this.props.value} onTextChange={this.handleChange}/>
         )
     }
 }
@@ -285,10 +280,10 @@ class ImageUploadContainer extends Component {
                 return (
                     <Col className="text-center">
                         <div className="ml-3">
-                        <ImageUpload sequence={seq}
-                                     handleNewImage={(seq, image) => (this.props.handleNewImage(seq, image))}
-                                     image={this.props.lesion.images[seq]}
-                        />
+                            <ImageUpload sequence={seq}
+                                         handleNewImage={(seq, image) => (this.props.handleNewImage(seq, image))}
+                                         image={this.props.lesion.images[seq]}
+                            />
                         </div>
                         <Input className="w-50 text-center mx-auto my-2" bsSize="sm" placeholder="Slice number"
                                onChange={(e) => this.props.handleImageSliceNumber(seq, e.target.value)}
@@ -318,7 +313,8 @@ class ImageUpload extends Component {
                           }}
                           multiple={false}
                 >
-                    <h6 className="text-center h-100" style={{lineHeight: "185px", textTransform: "uppercase"}}>{this.props.sequence}</h6>
+                    <h6 className="text-center h-100"
+                        style={{lineHeight: "185px", textTransform: "uppercase"}}>{this.props.sequence}</h6>
                 </Dropzone>
             )
         }

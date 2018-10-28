@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e852e485-2ffc-44f7-b196-978ba08461c8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DocumentGeneration.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/DocumentGeneration.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/LesionEdit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/LesionEdit.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/report_template.docx" beforeDir="false" afterPath="$PROJECT_DIR$/src/report_template.docx" afterDir="false" />
@@ -34,8 +33,8 @@
           <entry key="gitignore" value="1" />
           <entry key="html" value="3" />
           <entry key="ico" value="1" />
-          <entry key="js" value="32" />
-          <entry key="json" value="4" />
+          <entry key="js" value="33" />
+          <entry key="json" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
@@ -43,8 +42,8 @@
           <entry key="Git file" value="1" />
           <entry key="HTML" value="3" />
           <entry key="Image" value="1" />
-          <entry key="JSON" value="4" />
-          <entry key="JavaScript" value="32" />
+          <entry key="JSON" value="5" />
+          <entry key="JavaScript" value="33" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.js.language.service.starts">
@@ -56,9 +55,9 @@
         <counts>
           <entry key="gitignore" value="10" />
           <entry key="html" value="65" />
-          <entry key="js" value="50174" />
+          <entry key="js" value="50760" />
           <entry key="json" value="2" />
-          <entry key="txt" value="1141" />
+          <entry key="txt" value="1166" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -66,8 +65,8 @@
           <entry key="Git file" value="10" />
           <entry key="HTML" value="65" />
           <entry key="JSON" value="2" />
-          <entry key="JavaScript" value="50174" />
-          <entry key="PLAIN_TEXT" value="1141" />
+          <entry key="JavaScript" value="50760" />
+          <entry key="PLAIN_TEXT" value="1166" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages">
@@ -131,8 +130,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/App.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1983">
-              <caret line="239" column="10" selection-start-line="239" selection-start-column="10" selection-end-line="239" selection-end-column="10" />
+            <state relative-caret-position="334">
+              <caret line="249" column="58" selection-start-line="249" selection-start-column="58" selection-end-line="249" selection-end-column="58" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -140,11 +139,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/DocumentGeneration.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="384">
-              <caret line="50" column="42" selection-start-line="50" selection-start-column="42" selection-end-line="50" selection-end-column="42" />
+            <state relative-caret-position="400">
+              <caret line="66" column="53" selection-start-line="66" selection-start-column="53" selection-end-line="66" selection-end-column="53" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -164,14 +163,23 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/LesionEdit.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="334">
-              <caret line="114" column="16" selection-start-line="114" selection-start-column="16" selection-end-line="114" selection-end-column="16" />
+            <state relative-caret-position="391">
+              <caret line="207" column="41" selection-start-line="207" selection-start-column="41" selection-end-line="207" selection-end-column="41" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/TextArea.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="225">
+              <caret line="16" column="33" selection-start-line="16" selection-start-column="33" selection-end-line="16" selection-end-column="33" />
             </state>
           </provider>
         </entry>
@@ -191,8 +199,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ProstateAssessment.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="14" column="66" selection-start-line="14" selection-start-column="66" selection-end-line="14" selection-end-column="66" />
+            <state relative-caret-position="255">
+              <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -257,9 +265,9 @@
         <option value="$PROJECT_DIR$/src/components/TextArea.js" />
         <option value="$PROJECT_DIR$/src/LesionsList.js" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/src/LesionEdit.js" />
         <option value="$PROJECT_DIR$/src/App.js" />
         <option value="$PROJECT_DIR$/src/DocumentGeneration.js" />
-        <option value="$PROJECT_DIR$/src/LesionEdit.js" />
       </list>
     </option>
   </component>
@@ -327,6 +335,12 @@
               <item name="react-playground" type="b2602c69:ProjectViewProjectNode" />
               <item name="react-playground" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="react-playground" type="b2602c69:ProjectViewProjectNode" />
+              <item name="react-playground" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -660,7 +674,14 @@
       <option name="project" value="LOCAL" />
       <updated>1540377719813</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="Now works with loops">
+      <created>1540701709936</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1540701709936</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TodoView">
@@ -674,8 +695,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="1027" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.8835726" visible="true" weight="0.16056167" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.8835726" visible="true" weight="0.16056167" />
       <window_info id="Structure" order="1" sideWeight="0.11642743" side_tool="true" weight="0.20095694" />
       <window_info id="npm" order="2" sideWeight="0.272293" side_tool="true" weight="0.23374176" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -687,7 +709,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32941177" />
       <window_info anchor="bottom" id="Docker" order="7" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="8" sideWeight="0.49952874" visible="true" weight="0.32941177" />
+      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49952874" visible="true" weight="0.32941177" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49952874" weight="0.32941177" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50047123" side_tool="true" weight="0.32941177" />
@@ -732,7 +754,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Added a example list of lesions" />
     <MESSAGE value="New lesion assessment will update depending on anatomical location." />
     <MESSAGE value="Added polyfill for ie11" />
     <MESSAGE value="Adjusted polyfill import to first line" />
@@ -757,7 +778,8 @@
     <MESSAGE value="Installed docxtemplater and dependency" />
     <MESSAGE value="Generating and downloading docx works with docxtemplater" />
     <MESSAGE value="Image now works, using async/await methods" />
-    <option name="LAST_COMMIT_MESSAGE" value="Image now works, using async/await methods" />
+    <MESSAGE value="Now works with loops" />
+    <option name="LAST_COMMIT_MESSAGE" value="Now works with loops" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/App.css">
@@ -834,47 +856,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="33" selection-start-line="33" selection-end-line="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/TextArea.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="33" selection-start-line="16" selection-start-column="33" selection-end-line="16" selection-end-column="33" />
-          <folding>
-            <element signature="e#1#40#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
           <caret line="11" column="5" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/LesionsList.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="25" column="35" selection-start-line="25" selection-start-column="35" selection-end-line="25" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ProstateAssessment.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="66" selection-start-line="14" selection-start-column="66" selection-end-line="14" selection-end-column="66" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -884,6 +869,23 @@
           <caret line="14" selection-start-line="14" selection-end-line="14" />
           <folding>
             <element signature="e#0#33#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/TextArea.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="16" column="33" selection-start-line="16" selection-start-column="33" selection-end-line="16" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/LesionsList.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" column="35" selection-start-line="25" selection-start-column="35" selection-end-line="25" selection-end-column="35" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -898,20 +900,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/App.js">
+    <entry file="file://$PROJECT_DIR$/src/ProstateAssessment.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1983">
-          <caret line="239" column="10" selection-start-line="239" selection-start-column="10" selection-end-line="239" selection-end-column="10" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/DocumentGeneration.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="50" column="42" selection-start-line="50" selection-start-column="42" selection-end-line="50" selection-end-column="42" />
+        <state relative-caret-position="255">
+          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>
@@ -920,8 +912,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/LesionEdit.js">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="207" column="41" selection-start-line="207" selection-start-column="41" selection-end-line="207" selection-end-column="41" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/App.js">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="334">
-          <caret line="114" column="16" selection-start-line="114" selection-start-column="16" selection-end-line="114" selection-end-column="16" />
+          <caret line="249" column="58" selection-start-line="249" selection-start-column="58" selection-end-line="249" selection-end-column="58" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="33" selection-start-line="33" selection-end-line="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DocumentGeneration.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="66" column="53" selection-start-line="66" selection-start-column="53" selection-end-line="66" selection-end-column="53" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>
