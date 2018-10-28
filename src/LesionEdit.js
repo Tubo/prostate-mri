@@ -5,6 +5,7 @@ import {Form, FormGroup, Label, Input, FormText, Button} from 'reactstrap'
 import ImageMapper from 'react-image-mapper'
 import Dropzone from 'react-dropzone'
 
+
 import schematic from './schematic.png'
 import {schema_map, lexicon} from './data'
 
