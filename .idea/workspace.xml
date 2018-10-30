@@ -15,12 +15,14 @@
     <session id="-821422777">
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="gitignore" value="3" />
+          <entry key="gitignore" value="17" />
+          <entry key="txt" value="16" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Git file" value="3" />
+          <entry key="Git file" value="17" />
+          <entry key="PLAIN_TEXT" value="16" />
         </counts>
       </usages-collector>
     </session>
@@ -128,8 +130,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="23" selection-start-line="23" selection-end-line="23" />
+            <state relative-caret-position="345">
+              <caret line="23" column="5" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -210,12 +212,12 @@
       <option name="presentableId" value="Default" />
       <updated>1538465099588</updated>
     </task>
-    <task id="LOCAL-00001" summary="Changed favicon.ico to a hazelnut :-)">
-      <created>1538862500524</created>
+    <task id="LOCAL-00001" summary="Ignore workspace">
+      <created>1540866431786</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1538862500524</updated>
+      <updated>1540866431786</updated>
     </task>
     <task id="LOCAL-00002" summary="Separated App.js to subcomponents">
       <created>1538864527040</created>
@@ -455,6 +457,7 @@
       <option name="project" value="LOCAL" />
       <updated>1540701709936</updated>
     </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -486,7 +489,6 @@
     </layout>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="New lesion assessment will update depending on anatomical location." />
     <MESSAGE value="Added polyfill for ie11" />
     <MESSAGE value="Adjusted polyfill import to first line" />
     <MESSAGE value="Replace str.includes with str.indexOf for ie11" />
@@ -511,6 +513,7 @@
     <MESSAGE value="Generating and downloading docx works with docxtemplater" />
     <MESSAGE value="Image now works, using async/await methods" />
     <MESSAGE value="Now works with loops" />
-    <option name="LAST_COMMIT_MESSAGE" value="Now works with loops" />
+    <MESSAGE value="Ignore workspace" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ignore workspace" />
   </component>
 </project>
