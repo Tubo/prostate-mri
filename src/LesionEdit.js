@@ -287,6 +287,7 @@ class ImageUploadContainer extends Component {
                         </div>
                         <Input className="w-50 text-center mx-auto my-2" bsSize="sm" placeholder="Slice number"
                                onChange={(e) => this.props.handleImageSliceNumber(seq, e.target.value)}
+                               value={this.props.lesion.images_number[seq]}
                         />
                     </Col>
                 )

@@ -57,10 +57,11 @@ class Lesion extends Component {
             scores = lesion.scores,
             extension = lesion.extension,
             comment = lesion.comment,
-            images = lesion.images;
+            images = lesion.images,
+            number = lesion.images_number;
 
         const thumbnails = ['t2w', 'dwi', 'dce'].map(seq => {
-            return <SequenceMedia id={seq} image={images[seq]} seq={seq} score={scores[seq]}/>
+            return <SequenceMedia id={seq} image={images[seq]} seq={seq} score={scores[seq]} number={number}/>
         });
 
         return (
@@ -89,7 +90,7 @@ function SequenceMedia(props) {
             <img className="figure-img img-thumbnail" src={image ? image.preview : placeholder} width={100}/>
             <figcaption className="figure-caption text-center">
                 <p className="mt-0 mb-0">{props.id.toUpperCase()}: {props.score}</p>
-                <p className="mt-0 mb-0">No. 20</p>
+                <p className="mt-0 mb-0">No. {props.number[props.seq]}</p>
             </figcaption>
         </figure>
     )

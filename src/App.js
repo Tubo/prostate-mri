@@ -35,7 +35,7 @@ class App extends Component {
                     extension: null,
                     comment: "",
                     images: {},
-                    images_number: {}
+                    images_number: {},
                 }
             },
         };
@@ -51,6 +51,7 @@ class App extends Component {
             extension: null,
             comment: "",
             images: {},
+            images_number: {},
         };
 
         this.onBiopsyChange = this.onBiopsyChange.bind(this);
@@ -246,9 +247,9 @@ class App extends Component {
                 ...prevState.editing,
                 lesion: {
                     ...prevState.editing.lesion,
-                    images: {
-                        ...prevState.editing.lesion.images,
-                        [seq + '_number']: number,
+                    images_number: {
+                        ...prevState.editing.lesion.images_number,
+                        [seq]: number,
                     }
                 }
             }
