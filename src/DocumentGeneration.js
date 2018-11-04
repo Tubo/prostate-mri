@@ -17,9 +17,10 @@ export default async function generate_document(state_data) {
         let images = lesion.images;
         let keys = Object.keys(images);
 
+        lesion.images_buffer = {}
         for (let j=0; j<keys.length; j++) {
             let currentImage = images[keys[j]];
-            images[keys[j]] = await readAsArrayBuffer(currentImage);
+            lesion.images_buffer[keys[j]] = await readAsArrayBuffer(currentImage);
         }
         console.log(images)
     }
