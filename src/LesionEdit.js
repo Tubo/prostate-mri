@@ -302,7 +302,7 @@ class ImageUpload extends Component {
         if (image) {
             return (
                 <Dropzone disableClick={true} onDrop={this.onDrop}>
-                    <img src={image.preview} width={200}/>
+                    <img src={image.preview} width={200} height={200}/>
                 </Dropzone>
             )
         } else {
