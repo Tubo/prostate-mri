@@ -301,13 +301,14 @@ class ImageUpload extends Component {
 
         if (image) {
             return (
-                <Dropzone disableClick={true} onDrop={this.onDrop}>
+                <Dropzone disableClick={false} onDrop={this.onDrop} accept="image/*">
                     <img src={image.preview} width={200} height={200}/>
                 </Dropzone>
             )
         } else {
             return (
                 <Dropzone disableClick={false}
+                          accept="image/*"
                           onDrop={(files) => {
                               this.props.handleNewImage(this.props.sequence, files[0])
                           }}
